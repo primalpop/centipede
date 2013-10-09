@@ -24,3 +24,5 @@
 1. [About Dataset](https://commoncrawl.atlassian.net/wiki/display/CRWL/About+the+Data+Set)
 2. [Quick Start from Github](https://commoncrawl.atlassian.net/wiki/display/CRWL/Quick+Start+-+Build+from+Github)
 
+[Proposal](http://www.slideshare.net/primal007/cenitpede-analyzingwebcrawl)
+
