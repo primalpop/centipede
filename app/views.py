@@ -7,7 +7,7 @@ from app.lib.AppExceptions import *
 def index():
     return "Hello, World!"
 
-@app.route('/drugsearch', methods=['GET'])
+@app.route('/locationsearch', methods=['GET'])
 def locationsearch():
     try:
         if request.args.has_key('prefix'):
