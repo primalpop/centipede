@@ -1,6 +1,6 @@
 from flask import Flask
-from app.lib.LocationSearch import LocationSearch
 from app.config import BaseConfig
+from app.lib.LocationSearch import LocationSearch
 import logging
 from logging.handlers import RotatingFileHandler
 

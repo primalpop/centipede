@@ -20,7 +20,7 @@ class LocationSearch:
 		if len(prefix) >= self.SEARCH_PREFIX_MIN:
 			result_set = []
 			#TODO: Edit the fields
-			for result in self.collection.find( { "full_text": { "$regex" : "^"+prefix, "$options": 'i' } }, limit=10, fields={'drug_id':True, 'full_text':True, '_id':False} ):
+			for result in self.collection.find( { "_id": { "$regex" : "^"+prefix, "$options": 'i' } }, limit=10):
 				result_set.append(result)
 			return result_set
 		else:

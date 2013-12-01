@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, jsonify, make_response, session
 from app import app
 from app.lib.AppExceptions import *
+from app.lib.LocationSearch import LocationSearch
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hello, World!"
+    return render_template("index.html")
 
 @app.route('/locationsearch', methods=['GET'])
 def locationsearch():
