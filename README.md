@@ -1,5 +1,6 @@
-# centipede
+# Analyzing web crawl for context of a location
 
+[Presentation](http://primal.pw/project_files/Centipede_Midterm.pdf)
 
 ### Tutorials
 
@@ -15,5 +16,4 @@
 1. [About Dataset](https://commoncrawl.atlassian.net/wiki/display/CRWL/About+the+Data+Set)
 2. [Quick Start from Github](https://commoncrawl.atlassian.net/wiki/display/CRWL/Quick+Start+-+Build+from+Github)
 
-[Proposal](http://www.slideshare.net/primal007/cenitpede-analyzingwebcrawl)
 

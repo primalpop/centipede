@@ -1,54 +1,3 @@
-# -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, jsonify, make_response, session
-from app import app
-from app.lib.AppExceptions import *
-from app.lib.LocationSearch import LocationSearch
-
-@app.route('/')
-@app.route('/index')
-def index():
-    return render_template("index.html")
-
-'''jsonData = { "Baltimore":{
-    "health": {
-      "hospital": {
-        "data": {"frequency": 10, "relevance": 0.7845, "sentiment": "Mixed"},
-        "metadata": {
-          "article1": {"author": "Tom Jones", "title": "Current Rises in Health Insurance Policies in Baltimore", "timestamp": "26-FEB-1987 15:01:01.79"},
-          "article2": {"author": "Bob Jenkins", "title": "Obamacare in Hospitals", "timestamp": "06-SEP-2011 16:32:34.73"},
-          "article3": {"author": "Tom Jones", "title": "Rises in Hospital Fees", "timestamp": "31-DEC-1991 01:45:59.66"}
-        } 
-      } 
-    },
-    "crime": {
-      "assault": {
-        "data": {"frequency": 5, "relevance": 0.9045, "sentiment": "Negative"},
-        "metadata": {
-          "article1": {"author": "", "title": "Another shooting in Baltimore", "timestamp": "26-FEB-1987 15:01:01.79"},
-          "article2": {"author": "Anderson Silva", "title": "Street Crime up in cities", "timestamp": "06-SEP-2011 16:32:34.73"},
-          "article3": {"author": "John Jones", "title": "Rise in assaults in Baltimore", "timestamp": "31-DEC-1991 01:45:59.66"}
-        } 
-      },
-      "robbery": {
-        "data": {"frequency": 5, "relevance": 0.553, "sentiment": "Positive"},
-        "metadata": {
-          "article1": {"author": "Rob", "title": "Robbery of Museum in Baltimore", "timestamp": "26-FEB-1987 15:01:01.79"},
-          "article2": {"author": "Anderson Silva", "title": "Man held at gunpoint for wallet", "timestamp": "06-SEP-2011 16:32:34.73"},
-          "article3": {"author": "John Jenkins", "title": "Increase in robbery frequency in MD", "timestamp": "31-DEC-1991 01:45:59.66"}
-        } 
-      }       
-    }
-  }
-}'''    
-
-@app.route('/locationsearch', methods=['GET'])
-def locationsearch():
-    try:
-        if request.args.has_key('prefix'):
-            prefix = request.args['prefix']
-            search_results = app.locationsearch.search(prefix)
-            #return jsonify(status='success', results=search_results)
-            return '''
 <!DOCTYPE html>
 <meta charset="utf-8">
 <link href="../static/nv.d3.css" rel="stylesheet" type="text/css">
@@ -152,7 +101,37 @@ nv.addGraph(function() {
     return chart;
 });
 
-var myJSONObject = ''' + str(jsonify(search_results)) + '''
+var myJSONObject = { "Baltimore":{
+    "health": {
+      "hospital": {
+        "data": {"frequency": 10, "relevance": 0.7845, "sentiment": "Mixed"},
+        "metadata": {
+          "article1": {"author": "Tom Jones", "title": "Current Rises in Health Insurance Policies in Baltimore", "timestamp": "26-FEB-1987 15:01:01.79"},
+          "article2": {"author": "Bob Jenkins", "title": "Obamacare in Hospitals", "timestamp": "06-SEP-2011 16:32:34.73"},
+          "article3": {"author": "Tom Jones", "title": "Rises in Hospital Fees", "timestamp": "31-DEC-1991 01:45:59.66"}
+        } 
+      } 
+    },
+    "crime": {
+      "assault": {
+        "data": {"frequency": 5, "relevance": 0.9045, "sentiment": "Negative"},
+        "metadata": {
+          "article1": {"author": "", "title": "Another shooting in Baltimore", "timestamp": "26-FEB-1987 15:01:01.79"},
+          "article2": {"author": "Anderson Silva", "title": "Street Crime up in cities", "timestamp": "06-SEP-2011 16:32:34.73"},
+          "article3": {"author": "John Jones", "title": "Rise in assaults in Baltimore", "timestamp": "31-DEC-1991 01:45:59.66"}
+        } 
+      },
+      "robbery": {
+        "data": {"frequency": 5, "relevance": 0.553, "sentiment": "Positive"},
+        "metadata": {
+          "article1": {"author": "Rob", "title": "Robbery of Museum in Baltimore", "timestamp": "26-FEB-1987 15:01:01.79"},
+          "article2": {"author": "Anderson Silva", "title": "Man held at gunpoint for wallet", "timestamp": "06-SEP-2011 16:32:34.73"},
+          "article3": {"author": "John Jenkins", "title": "Increase in robbery frequency in MD", "timestamp": "31-DEC-1991 01:45:59.66"}
+        } 
+      }       
+    }
+  }
+}
 
 var Position = '';
 for (var y in myJSONObject){
@@ -258,10 +237,3 @@ L.tileLayer('http://{s}.tile.cloudmade.com/e66c31e8a69b402b8535b986af0e18a3/997/
 }
 
 </script>
-'''
-
-
-        else:
-            raise ParameterMissingException(expected=['prefix'], provided=request.args)
-    except ParameterMissingException as error:
-        return jsonify(status='error', msg=str(error))

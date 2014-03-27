@@ -25,6 +25,6 @@ file_handler.setLevel(logging.DEBUG)
 app.logger.addHandler(file_handler)	
 app.logger.debug('Initializing log')
 
-app.before_first_request(app_bootstrap)
+#app.before_first_request(app_bootstrap)
 
 from app import views
